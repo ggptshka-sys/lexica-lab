@@ -1,0 +1,264 @@
+.section {
+  position: relative;
+  width: 100%;
+  color: #000;
+  padding-top: var(--lab-pad-top);
+  padding-bottom: var(--lab-pad-bottom);
+  min-height: var(--lab-section-h);
+  z-index: 4;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #fff;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+.intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-top: var(--lab-intro-pad-top);
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.kickerMuted {
+  opacity: 0.5;
+}
+
+.introCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: min(var(--lab-copy-w), 100%);
+  flex-shrink: 0;
+}
+
+.headline {
+  font-family: var(--font-ui);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.lead {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+  max-width: var(--lab-body-w);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: var(--lab-grid-top);
+  min-height: var(--lab-col-min);
+}
+
+.col {
+  position: relative;
+  min-height: var(--lab-col-min);
+  padding: 0 0 var(--space-4) var(--lab-col-pad);
+  overflow: hidden;
+}
+
+.rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(280ms + var(--col, 0) * 120ms);
+}
+
+.colIndex {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+  opacity: 0.5;
+}
+
+.colBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--lab-col-body-top);
+  max-width: var(--lab-col-body-w);
+}
+
+.colTitle {
+  font-family: var(--font-ui);
+  font-size: var(--fs-headline);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.media {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: var(--lab-media-h);
+  background: #000;
+  border-radius: calc(4px * var(--ui-scale));
+  overflow: hidden;
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--media-d, 520ms);
+}
+
+.colText {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.visible .reveal {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.visible .colIndex.reveal {
+  opacity: 0.5;
+}
+
+.visible .rule {
+  transform: scaleY(1);
+}
+
+.visible .media {
+  transform: scaleY(1);
+}
+
+/* Figma 105:1703 — Lab @402 */
+@media (max-width: 960px) {
+  .section {
+    min-height: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .intro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    padding-top: 0;
+  }
+
+  .introCopy {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .headline {
+    font-size: 48px;
+    letter-spacing: -0.05em;
+  }
+
+  .lead {
+    max-width: none;
+    font-size: 14px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+    gap: 40px;
+    min-height: 0;
+  }
+
+  .col {
+    min-height: 0;
+    padding: 0 0 0 15px;
+  }
+
+  .colBody {
+    margin-top: 40px;
+    max-width: none;
+    gap: 20px;
+  }
+
+  .colTitle {
+    font-size: 28px;
+    letter-spacing: -0.05em;
+  }
+
+  .colText {
+    font-size: 14px;
+  }
+
+  .media {
+    height: 214px;
+  }
+}
+
+@media (max-width: 640px) {
+  .headline {
+    font-size: clamp(36px, 12vw, 48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .rule,
+  .media {
+    transition: none !important;
+    filter: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .rule,
+  .media {
+    transform: none;
+  }
+}

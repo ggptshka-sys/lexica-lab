@@ -1,0 +1,293 @@
+/* Figma 40:1460 — Landing / Desktop 1443 (1440×1125) */
+
+.case {
+  position: relative;
+  width: 100%;
+  color: #fff;
+  z-index: 3;
+  min-height: calc(1125px * var(--ui-scale));
+  padding: calc(80px * var(--ui-scale)) 0 calc(0px * var(--ui-scale));
+  box-sizing: border-box;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #000;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* kicker @80 → featured @166 → delta 86 from section pad-top 80 */
+  gap: 0;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  font-variation-settings: 'CRSV' 0, 'ELSH' 0, 'ELXP' 0;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.kickerMuted {
+  opacity: 0.5;
+}
+
+/* featured @166 − kicker end (~91) ≈ 75; use 86 from pad alignment */
+.featured {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(20px * var(--ui-scale));
+  margin-top: calc(75px * var(--ui-scale));
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(20px * var(--ui-scale));
+  min-width: 0;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  height: calc(414px * var(--ui-scale));
+  overflow: hidden;
+  background: #fff;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+  transition: transform 0.45s ease;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Figma image 7 — oversized crop inside frame */
+.mediaHr {
+  width: 130%;
+  height: 145%;
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.mediaCore {
+  width: 110%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.card:hover .mediaHr,
+.card:focus-within .mediaHr {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.card:hover .mediaCore,
+.card:focus-within .mediaCore {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-headline);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: calc(-1.9px * var(--ui-scale));
+  text-transform: lowercase;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.body {
+  margin: 0;
+  max-width: calc(320px * var(--ui-scale));
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: calc(-0.6px * var(--ui-scale));
+  color: #fff;
+  opacity: 0.5;
+}
+
+.foot {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: calc(-0.6px * var(--ui-scale));
+  color: #fff;
+  white-space: nowrap;
+}
+
+.demo {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.demo:hover {
+  opacity: 0.7;
+}
+
+/* shots @908 − featured end ~708 ≈ 200 from featured bottom; featured margin+content */
+.shotsBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  margin-top: calc(200px * var(--ui-scale));
+  width: 100%;
+  padding-bottom: 0;
+}
+
+.shotsLabel {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: calc(-0.6px * var(--ui-scale));
+  color: #fff;
+  opacity: 0.2;
+  white-space: nowrap;
+}
+
+.shots {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(20px * var(--ui-scale));
+  width: 100%;
+  opacity: 0.1;
+}
+
+.shot {
+  flex: 1 0 0;
+  min-width: 0;
+  height: calc(var(--shot-h) * var(--ui-scale));
+  background: #fff;
+  transform: scale(1);
+  transform-origin: top center;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.shot:hover {
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media,
+  .mediaHr,
+  .mediaCore,
+  .shot {
+    transition: none;
+  }
+}
+
+/* Figma 105:1703 / 114:2 — Case cards @402 */
+@media (max-width: 1100px) {
+  .case {
+    min-height: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .featured {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+    gap: 40px;
+  }
+
+  .card {
+    gap: 20px;
+  }
+
+  .frame {
+    height: 284px;
+  }
+
+  .title {
+    font-size: 28px;
+    letter-spacing: -0.05em;
+    white-space: normal;
+  }
+
+  .body {
+    max-width: none;
+    font-size: 12px;
+  }
+
+  .shotsBlock {
+    margin-top: 80px;
+  }
+
+  .shots {
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .shots::-webkit-scrollbar {
+    display: none;
+  }
+
+  .shot {
+    flex: 0 0 73px;
+  }
+}
+
+@media (max-width: 640px) {
+  .foot {
+    gap: 20px;
+  }
+
+  .shotsLabel {
+    white-space: normal;
+  }
+}

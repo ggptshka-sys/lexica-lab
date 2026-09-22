@@ -1,0 +1,19 @@
+.root {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.measure {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.live {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+}

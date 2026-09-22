@@ -1,0 +1,373 @@
+/* Figma 24:3 — Landing / Desktop 1440 (1440×804) */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: var(--hero-min-h);
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Smaller centered intro word before 3D */
+.introWord {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: min(38%, calc(480px * var(--ui-scale)));
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  aspect-ratio: 1349 / 162;
+  opacity: 1;
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.introWordOut {
+  opacity: 0;
+  transform: translate(-50%, -46%) scale(0.94);
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-max);
+  min-height: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.inner a,
+.inner button {
+  pointer-events: auto;
+}
+
+/* Figma 74:2 — left 40, top 134, 200 / lh 0.8 / tracking -10 */
+.display {
+  position: absolute;
+  left: var(--page-pad);
+  top: calc(134px * var(--ui-scale));
+  margin: 0;
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: var(--fs-mega);
+  line-height: 0.8;
+  letter-spacing: calc(-10px * var(--ui-scale));
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Figma 83:16 — right tagline, top 236 */
+.tagline {
+  position: absolute;
+  left: calc(1112px * var(--ui-scale));
+  top: calc(236px * var(--ui-scale));
+  margin: 0;
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.taglineLine {
+  display: block;
+  margin: 0;
+}
+
+/* Figma 74:10 — left 40, top 439, 7×24 circle “/” */
+.marksWrap {
+  position: absolute;
+  left: var(--page-pad);
+  top: calc(439px * var(--ui-scale));
+  width: calc(1368px * var(--ui-scale));
+  max-width: calc(100% - 2 * var(--page-pad));
+}
+
+.marks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mark {
+  position: relative;
+  display: block;
+  width: calc(24px * var(--ui-scale));
+  height: calc(24px * var(--ui-scale));
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #fff;
+  will-change: transform;
+}
+
+.markGlyph {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 4px * var(--ui-scale));
+  transform: translateX(-50%);
+  font-family: var(--font-ui);
+  font-size: calc(8px * var(--ui-scale));
+  line-height: 1.1;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.markCw {
+  animation: markSpinCw linear infinite;
+}
+
+.markCcw {
+  animation: markSpinCcw linear infinite;
+}
+
+@keyframes markSpinCw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes markSpinCcw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markCw,
+  .markCcw {
+    animation: none;
+  }
+}
+
+/* Bottom cluster — 40px from viewport bottom */
+.copyBlock {
+  position: absolute;
+  left: var(--page-pad);
+  top: auto;
+  bottom: var(--edge-y);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(24px * var(--ui-scale));
+  width: calc(287px * var(--ui-scale));
+}
+
+.lead {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+  color: #fff;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(8px * var(--ui-scale)) calc(12px * var(--ui-scale));
+  border: none;
+  border-radius: calc(4px * var(--ui-scale));
+  background: #fff;
+  color: #000;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  line-height: 1.1;
+  white-space: nowrap;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.btnPrimary:hover {
+  background: #e8e8e8;
+}
+
+.btnLabel {
+  font-family: var(--font-ui);
+  font-variant-ligatures: none;
+}
+
+/* Scroll cue — bottom center, same 40px edge */
+.scrollWrap {
+  position: absolute;
+  left: 50%;
+  top: auto;
+  bottom: var(--edge-y);
+  transform: translateX(-50%);
+}
+
+.scroll {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.scrollIcon {
+  width: calc(9px * var(--ui-scale));
+  height: calc(12px * var(--ui-scale));
+  flex-shrink: 0;
+  color: currentColor;
+  overflow: visible;
+}
+
+.scrollDot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: scrollCue 1.45s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+@keyframes scrollCue {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollDot {
+    animation: none;
+  }
+}
+
+@media (min-width: 1920px) {
+  .tagline {
+    left: auto;
+    right: var(--page-pad);
+  }
+
+  .marksWrap {
+    width: calc(100% - 2 * var(--page-pad));
+    max-width: none;
+  }
+
+  .copyBlock {
+    left: var(--page-pad);
+    bottom: var(--edge-y);
+  }
+
+  .scrollWrap {
+    bottom: var(--edge-y);
+  }
+}
+
+/* Figma 105:1703 — Hero @402 */
+@media (max-width: 1100px) {
+  .hero {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .inner {
+    padding: 0 var(--page-pad);
+    /* nav top 40 + logo 30 + gap 64 */
+    padding-top: 134px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    min-height: 100dvh;
+  }
+
+  .display,
+  .tagline,
+  .marksWrap,
+  .copyBlock,
+  .scrollWrap {
+    position: static;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+    transform: none;
+  }
+
+  .display {
+    font-size: 72px;
+    letter-spacing: -0.05em;
+    line-height: 0.8;
+    white-space: normal;
+    max-width: none;
+  }
+
+  .tagline {
+    margin-top: 24px;
+    white-space: normal;
+    font-size: 14px;
+    letter-spacing: -0.05em;
+  }
+
+  .marksWrap {
+    width: 100%;
+    max-width: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 40px 0;
+  }
+
+  .marks {
+    width: 100%;
+    max-width: none;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .copyBlock {
+    max-width: none;
+    width: 100%;
+    margin-top: 0;
+    gap: 20px;
+  }
+
+  .lead {
+    font-size: 14px;
+    letter-spacing: -0.05em;
+  }
+
+  .btnPrimary {
+    font-size: 14px;
+  }
+
+  .scrollWrap {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .display {
+    font-size: clamp(56px, 18vw, 72px);
+  }
+
+  .mark {
+    width: 24px;
+    height: 24px;
+  }
+}

@@ -1,0 +1,25 @@
+# Plan — Lexica Lab landing
+
+- [x] Figma 24:3 / 26:112 (актуальный макет)
+- [x] Nav + Hero layout desktop
+- [x] SymbolField: preloader → mask assemble → idle → hover disperse
+- [x] PNG-маска `symbol-mask.png`
+- [x] Cursor SVG из Figma
+- [x] Точки вместо глифов; preloader→assemble→UI; scroll explode
+- [x] README
+- [x] Секция The Lab (37:724) + reveal-анимации
+- [x] Desktop scale: 1440 baseline → 1920 / 2K / 4K (`--ui-scale`)
+- [x] VoiceWave / InfinityFlow / LogoRings
+- [x] Case (40:1460) — 2 featured + мини-шоты, scramble/zoom
+- [x] Team (87:1288) — фото → описание
+- [x] Process (60:2453)
+- [x] Services / тарифы (56:2098)
+- [x] Contacts (61:2603) + Nav detach
+- [x] Preloader: particles + stable logo (cipher-like)
+- [x] CipherField site-wide + logo fade (no explode); gray on light
+- [x] Hero cookie banner (blur stub)
+- [x] Lowercase тексты сайта
+- [x] Mobile / 1920+ адаптив (pad 40, mark smaller)
+- [x] Mobile Frame 93 `105:1703` — burger, секции 1:1
+- [ ] Case modal по клику
+- [ ] Реальные cover-изображения кейсов

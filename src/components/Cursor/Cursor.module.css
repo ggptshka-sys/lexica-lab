@@ -1,0 +1,32 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  transform-origin: top left;
+  will-change: transform, filter;
+  user-select: none;
+  filter: none;
+  transition: filter 80ms linear;
+}
+
+/* White SVG → black on light sections */
+.cursor.onLight {
+  filter: invert(1);
+}
+
+@media (pointer: coarse) {
+  .root {
+    display: none;
+  }
+}

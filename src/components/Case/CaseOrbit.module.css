@@ -1,0 +1,143 @@
+.stage {
+  position: relative;
+  width: 100%;
+  height: calc(680px * var(--ui-scale));
+  perspective: 1600px;
+  perspective-origin: 50% 42%;
+  overflow: hidden;
+}
+
+.world {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 42%;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.pathGuide {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border: 1.5px solid #ff2a2a;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateZ(0);
+  box-sizing: border-box;
+}
+
+.card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: calc(260px * var(--ui-scale));
+  height: calc(168px * var(--ui-scale));
+  margin: calc(-84px * var(--ui-scale)) 0 0 calc(-130px * var(--ui-scale));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+  padding: 0;
+  overflow: hidden;
+  cursor: none;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  background: #111;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.imgTone,
+.imgColor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Default: stylized mono. If coverTone === coverColor, filter makes the look. */
+.imgTone {
+  filter: grayscale(1) contrast(1.12) brightness(0.92);
+  opacity: 1;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imgColor {
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .imgColor,
+.card:focus-visible .imgColor,
+.staticCard:hover .imgColor,
+.staticCard:focus-visible .imgColor {
+  opacity: 1;
+}
+
+.card:hover .imgTone,
+.card:focus-visible .imgTone,
+.staticCard:hover .imgTone,
+.staticCard:focus-visible .imgTone {
+  opacity: 0;
+}
+
+.cardLabel {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  right: 12px;
+  z-index: 2;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+.staticGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.staticCard {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  padding: 0;
+  overflow: hidden;
+  cursor: none;
+  background: #111;
+}
+
+@media (pointer: coarse) {
+  .card,
+  .staticCard {
+    cursor: pointer;
+  }
+
+  /* Touch: no hover — show color by default */
+  .imgTone {
+    opacity: 0;
+  }
+
+  .imgColor {
+    opacity: 1;
+  }
+}

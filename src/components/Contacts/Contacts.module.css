@@ -1,0 +1,389 @@
+.section {
+  position: relative;
+  width: 100%;
+  color: #fff;
+  min-height: calc(1277px * var(--ui-scale));
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #000;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: calc(80px * var(--ui-scale)) var(--page-pad) calc(40px * var(--ui-scale));
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Figma contacts lead + kicker — без верхней линии */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.lead {
+  margin: 0;
+  max-width: calc(891px * var(--ui-scale));
+  font-size: var(--fs-headline);
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Figma: logo/title top 378 → ~258px after header block (~120) */
+.body {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(380px, 640px);
+  justify-content: space-between;
+  column-gap: calc(80px * var(--ui-scale));
+  margin-top: calc(258px * var(--ui-scale));
+  flex: 1;
+  align-items: start;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  /* logo 378 → nav 503; logo h 45 → gap 80 */
+  gap: calc(80px * var(--ui-scale));
+}
+
+.brand {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(12px * var(--ui-scale));
+}
+
+.logo {
+  width: calc(165.39px * var(--ui-scale));
+  height: auto;
+}
+
+.lang {
+  font-size: var(--fs-sm);
+  font-weight: 300;
+  line-height: 1.1;
+  text-transform: none;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: calc(16px * var(--ui-scale));
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-sm);
+  line-height: 1.1;
+  transition: opacity 160ms ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  opacity: 0.55;
+}
+
+.slash {
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+}
+
+.formCol {
+  display: flex;
+  flex-direction: column;
+  gap: calc(80px * var(--ui-scale));
+  width: 100%;
+  max-width: calc(640px * var(--ui-scale));
+  justify-self: end;
+  margin-right: 0;
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: calc(415px * var(--ui-scale));
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+/* Figma 61:2743 — bg 5%, только left border */
+.input,
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font: inherit;
+  font-size: var(--fs-sm);
+  line-height: 1.1;
+  outline: none;
+  transition: border-color 160ms ease;
+}
+
+.input:focus,
+.input:focus-visible,
+.textarea:focus,
+.textarea:focus-visible {
+  border-left-color: #fff;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.textarea {
+  min-height: calc(100px * var(--ui-scale));
+  height: calc(100px * var(--ui-scale));
+  resize: vertical;
+  align-items: flex-start;
+}
+
+.submit {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: var(--fs-sm);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.legal {
+  margin: 0;
+  font-size: var(--fs-xs);
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.legal a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Figma copyright top 1226 on 1277 */
+.copy {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: auto;
+  padding-top: calc(48px * var(--ui-scale));
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+  line-height: 1.1;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.visible .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (min-width: 1920px) {
+  .section {
+    min-height: min(100dvh, calc(1277px * var(--ui-scale)));
+  }
+
+  .inner {
+    padding-bottom: var(--edge-y);
+  }
+
+  .lead {
+    max-width: calc(891px * var(--ui-scale));
+    font-size: var(--fs-headline);
+    letter-spacing: -0.05em;
+  }
+
+  /* Stable grid; type follows --ui-scale like other sections */
+  .body {
+    grid-template-columns: calc(220px * var(--ui-scale)) minmax(
+        calc(520px * var(--ui-scale)),
+        calc(720px * var(--ui-scale))
+      );
+    justify-content: space-between;
+    column-gap: 0;
+    width: 100%;
+    max-width: none;
+    margin: calc(120px * var(--ui-scale)) 0 0;
+    flex: 1;
+  }
+
+  .side {
+    gap: calc(64px * var(--ui-scale));
+    justify-self: start;
+  }
+
+  .logo {
+    width: calc(165px * var(--ui-scale));
+  }
+
+  .formCol {
+    justify-self: end;
+    width: 100%;
+    max-width: calc(720px * var(--ui-scale));
+    gap: calc(64px * var(--ui-scale));
+  }
+
+  .formBlock {
+    width: 100%;
+    max-width: calc(520px * var(--ui-scale));
+  }
+
+  .title {
+    font-size: var(--fs-display);
+    letter-spacing: -0.05em;
+  }
+
+  .copy {
+    padding-top: calc(40px * var(--ui-scale));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .visible .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Figma 105:1703 / 114:263 — Contacts @402 */
+@media (max-width: 960px) {
+  .section {
+    min-height: 0;
+  }
+
+  .inner {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 40px;
+    padding-top: 40px;
+  }
+
+  .lead {
+    max-width: none;
+    font-size: 28px;
+    letter-spacing: -0.05em;
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+    margin-top: 80px;
+    gap: 80px;
+  }
+
+  .side {
+    gap: 80px;
+  }
+
+  .logo {
+    width: 165px;
+  }
+
+  .nav {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+
+  .formCol {
+    max-width: none;
+    gap: 40px;
+    justify-self: start;
+  }
+
+  .formBlock {
+    max-width: none;
+  }
+
+  .title {
+    font-size: 48px;
+    letter-spacing: -0.05em;
+  }
+
+  .copy {
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: clamp(36px, 12vw, 48px);
+  }
+
+  .lead {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+
+  .body {
+    margin-top: 64px;
+    gap: 64px;
+  }
+
+  .side {
+    gap: 48px;
+  }
+}

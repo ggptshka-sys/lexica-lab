@@ -1,0 +1,270 @@
+.section {
+  position: relative;
+  width: 100%;
+  color: #000;
+  padding: calc(80px * var(--ui-scale)) 0 calc(120px * var(--ui-scale));
+  min-height: calc(972px * var(--ui-scale));
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+.top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  margin: 0;
+  max-width: calc(891px * var(--ui-scale));
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.kicker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.kickerMuted {
+  opacity: 0.5;
+}
+
+/* Figma: title bottom ~280, cards top 369 → ~89px */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: calc(20px * var(--ui-scale));
+  margin-top: calc(90px * var(--ui-scale));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0 0 0 var(--space-4);
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  min-height: calc(400px * var(--ui-scale));
+}
+
+.index {
+  margin: 0 0 calc(100px * var(--ui-scale));
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-headline);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.arrow {
+  width: calc(24px * var(--ui-scale));
+  height: calc(24px * var(--ui-scale));
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.body {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+}
+
+.days {
+  margin: 0;
+  font-size: var(--fs-headline);
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  opacity: 0.3;
+}
+
+.price {
+  margin: 0;
+  font-size: var(--fs-headline);
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.cta {
+  position: relative;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: var(--fs-sm);
+  line-height: 1.1;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  color: #000;
+  transition:
+    background-color 320ms cubic-bezier(0.33, 0, 0.2, 1),
+    color 320ms cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.ctaActive {
+  background: #000;
+  color: #fff;
+}
+
+.ctaLabel {
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+.ctaLabel > span {
+  grid-area: 1 / 1;
+  transition: opacity 280ms cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.ctaLabelIdle {
+  opacity: 1;
+}
+
+.ctaActive .ctaLabelIdle {
+  opacity: 0;
+}
+
+.ctaLabelActive {
+  opacity: 0;
+}
+
+.ctaActive .ctaLabelActive {
+  opacity: 1;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.visible .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .visible .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Figma 105:1703 / 114:147 — Services @402 */
+@media (max-width: 960px) {
+  .section {
+    min-height: 0;
+    padding: 0 0 80px;
+  }
+
+  .top {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 40px;
+    padding-top: 40px;
+  }
+
+  .kicker {
+    position: static;
+  }
+
+  .title {
+    text-align: left;
+    max-width: none;
+    font-size: 48px;
+    letter-spacing: -0.05em;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+    row-gap: 40px;
+  }
+
+  .card {
+    min-height: 0;
+    padding: 0 0 0 17px;
+    gap: 20px;
+  }
+
+  .index {
+    margin-bottom: 80px;
+  }
+
+  .name,
+  .days,
+  .price {
+    font-size: 28px;
+  }
+
+  .body {
+    font-size: 12px;
+  }
+
+  .cta {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: clamp(36px, 12vw, 48px);
+  }
+
+  .index {
+    margin-bottom: 48px;
+  }
+}

@@ -1,0 +1,32 @@
+.fade {
+  display: block;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeRise var(--fade-duration, 900ms) cubic-bezier(0.22, 1, 0.36, 1)
+    var(--fade-delay, 0ms) forwards;
+}
+
+.instant {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

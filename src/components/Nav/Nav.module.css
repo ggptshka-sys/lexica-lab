@@ -1,0 +1,235 @@
+.header {
+  position: fixed;
+  top: var(--edge-y);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 2 * var(--page-pad));
+  max-width: var(--nav-max);
+  pointer-events: none;
+  transition:
+    color 180ms ease,
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s;
+}
+
+.headerHidden {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    color 180ms ease,
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 700ms;
+}
+
+.headerVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.headerVisible a,
+.headerVisible button {
+  pointer-events: auto;
+}
+
+.onDark {
+  color: #fff;
+}
+
+.onLight {
+  color: #000;
+}
+
+.onLight .logoImg {
+  filter: invert(1);
+}
+
+.onLight .burgerIcon {
+  filter: invert(1);
+}
+
+.brand {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(8px * var(--ui-scale));
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  width: var(--logo-w);
+  height: var(--logo-h);
+  display: block;
+  transition: filter 180ms ease;
+}
+
+.lang {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  opacity: 0.85;
+  text-transform: none;
+  transition: opacity 160ms ease;
+}
+
+.lang:hover,
+.lang:focus-visible {
+  opacity: 1;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.link,
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-sm);
+  line-height: 1.1;
+  white-space: nowrap;
+  transition: opacity 160ms ease;
+}
+
+.link:hover,
+.link:focus-visible,
+.cta:hover,
+.cta:focus-visible {
+  opacity: 0.55;
+}
+
+.slash {
+  font-family: var(--font-slash);
+  font-weight: 400;
+  line-height: 1;
+  font-variation-settings: 'CRSV' 0, 'ELSH' 0, 'ELXP' 0;
+}
+
+.cta {
+  flex-shrink: 0;
+}
+
+.burger {
+  display: none;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  align-items: center;
+  justify-content: center;
+}
+
+.burgerIcon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.burgerClose {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.drawer {
+  display: none;
+}
+
+/* Figma 105:1703 — mobile: logo + burger only */
+@media (max-width: 900px) {
+  .header {
+    top: 40px;
+    width: calc(100% - 2 * var(--page-pad));
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .nav,
+  .cta {
+    display: none;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+
+  .drawer {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    padding: 100px var(--page-pad) var(--page-pad);
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+    pointer-events: auto;
+  }
+
+  .onLight.menuOpen {
+    color: #fff;
+  }
+
+  .onLight.menuOpen .logoImg,
+  .onLight.menuOpen .burgerIcon {
+    filter: none;
+  }
+
+  .drawerNav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .drawerLink,
+  .drawerCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  .drawerCta {
+    margin-top: 24px;
+    padding: 10px 14px;
+    border-radius: 4px;
+    background: #fff;
+    color: #000;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    top: 40px;
+  }
+
+  .logoImg {
+    width: 110px;
+    height: 30px;
+  }
+}

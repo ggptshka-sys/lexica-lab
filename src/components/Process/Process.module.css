@@ -1,0 +1,213 @@
+/* Figma Process 60:2453 — Landing / Desktop 1445 (1440×996) */
+
+.section {
+  position: relative;
+  width: 100%;
+  color: #000;
+  padding: calc(80px * var(--ui-scale)) 0 calc(120px * var(--ui-scale));
+  min-height: calc(996px * var(--ui-scale));
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #fff;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+/* Figma 60:2490 — Frame 23: border-t, pt 40, space-between */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-top: calc(40px * var(--ui-scale));
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Neue Machina 12 / lh 1.4 / tracking -0.6 */
+.title {
+  margin: 0;
+  max-width: calc(900px * var(--ui-scale));
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: calc(-0.6px * var(--ui-scale));
+  color: #000;
+}
+
+/* Bitcount Grid Single 10 / lh 1.1 / gap 8 — solid black (no mute) */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+  margin: 0;
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  font-variation-settings: 'CRSV' 0, 'ELSH' 0, 'ELXP' 0;
+  line-height: 1.1;
+  color: #000;
+  white-space: nowrap;
+}
+
+/* Figma 61:2544 — col stack, gap 80 */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(80px * var(--ui-scale));
+  /* steps @245 − header end @138 → 107 */
+  margin-top: calc(107px * var(--ui-scale));
+}
+
+/* Figma row — gap 40, two equal cols 660 */
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  width: 100%;
+}
+
+/* Figma card — col gap 16, height ~134 */
+.card {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(16px * var(--ui-scale));
+  min-width: 0;
+}
+
+/* Figma 61:2562 — head h≈101, gap 20, border-b, items-start */
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: calc(100px * var(--ui-scale));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+/* Neue Machina 100 / lh 1 / tracking -5 */
+.num {
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: calc(-5px * var(--ui-scale));
+  color: #000;
+  text-align: center;
+}
+
+/* Neue Machina 38 / lh 1.2 / tracking -1.9 */
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-headline);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: calc(-1.9px * var(--ui-scale));
+  color: #000;
+}
+
+/* Neue Machina 12 / lh 1.4 / tracking -0.6 / opacity 50% */
+.cardBody {
+  margin: 0;
+  width: 100%;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: calc(-0.6px * var(--ui-scale));
+  color: #000;
+  opacity: 0.5;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.visible .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .visible .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Figma 105:1703 — Process @402: kicker only + single-col steps */
+@media (max-width: 900px) {
+  .section {
+    min-height: 0;
+    padding: 0 0 80px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 0;
+    padding-top: 20px;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .stack {
+    margin-top: 40px;
+    gap: 40px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .head {
+    min-height: 0;
+    padding-bottom: 16px;
+    white-space: normal;
+    gap: 20px;
+  }
+
+  .num,
+  .cardTitle {
+    font-size: 28px;
+    letter-spacing: -0.05em;
+    line-height: 1.2;
+  }
+
+  .cardBody {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-bottom: 64px;
+  }
+}

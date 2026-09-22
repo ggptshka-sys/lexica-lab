@@ -1,0 +1,272 @@
+/* Figma 87:1288 — Landing / Desktop 1447 (1440×920) */
+
+.section {
+  position: relative;
+  width: 100%;
+  color: #fff;
+  z-index: 3;
+  min-height: calc(920px * var(--ui-scale));
+  padding: calc(80px * var(--ui-scale)) 0 calc(200px * var(--ui-scale));
+  box-sizing: border-box;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #000;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
+}
+
+/* Figma 106:1944 — border-t, pt 40, space-between */
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-top: calc(40px * var(--ui-scale));
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.photos {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: calc(120px * var(--ui-scale));
+}
+
+.photoBtn {
+  position: relative;
+  flex-shrink: 0;
+  width: calc(80px * var(--ui-scale));
+  height: calc(80px * var(--ui-scale));
+  padding: 0;
+  border: none;
+  border-radius: calc(4px * var(--ui-scale));
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  transition:
+    width 0.35s ease,
+    height 0.35s ease,
+    border-radius 0.35s ease;
+}
+
+/* Only one enlarged at a time (hover wins over active) — Figma 120 */
+.photoBtnBig {
+  width: calc(120px * var(--ui-scale));
+  height: calc(120px * var(--ui-scale));
+  border-radius: calc(2.4px * var(--ui-scale));
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+}
+
+.more {
+  position: relative;
+  flex-shrink: 0;
+  width: calc(80px * var(--ui-scale));
+  height: calc(80px * var(--ui-scale));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: calc(4px * var(--ui-scale));
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: calc(-0.6px * var(--ui-scale));
+  color: #fff;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+  margin: 0;
+  font-family: var(--font-slash);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  font-variation-settings: 'CRSV' 0, 'ELSH' 0, 'ELXP' 0;
+  line-height: 1.1;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Stack all bios in one grid cell — height = max, no jump */
+.bioStack {
+  display: grid;
+  margin-top: calc(200px * var(--ui-scale));
+  max-width: calc(1053px * var(--ui-scale));
+}
+
+.bioPanel {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.bioPanelActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  padding-bottom: calc(8px * var(--ui-scale));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: calc(-5px * var(--ui-scale));
+  color: #fff;
+  white-space: nowrap;
+}
+
+.role {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-headline);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: calc(-1.9px * var(--ui-scale));
+  text-transform: lowercase;
+  color: #fff;
+  white-space: nowrap;
+  padding-top: calc(42px * var(--ui-scale));
+}
+
+.text {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-headline);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: calc(-1.9px * var(--ui-scale));
+  text-transform: lowercase;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoBtn,
+  .bioPanel {
+    transition: none;
+  }
+}
+
+/* Figma 105:1703 / 114:146 — Team @402 */
+@media (max-width: 1100px) {
+  .section {
+    min-height: 0;
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
+  .top {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 40px;
+    padding-top: 40px;
+  }
+
+  .photos {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 92px;
+  }
+
+  .photoBtn,
+  .more {
+    width: 61px;
+    height: 61px;
+  }
+
+  .photoBtnBig {
+    width: 92px;
+    height: 92px;
+  }
+
+  .bioStack {
+    margin-top: 80px;
+    max-width: none;
+  }
+
+  .bioPanel {
+    gap: 40px;
+  }
+
+  .head {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 8px;
+  }
+
+  .name {
+    font-size: 48px;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+  }
+
+  .role {
+    padding-top: 0;
+    font-size: 14px;
+    letter-spacing: -0.05em;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .text {
+    font-size: 28px;
+    letter-spacing: -0.05em;
+  }
+}
+
+@media (max-width: 640px) {
+  .name {
+    font-size: clamp(32px, 10vw, 48px);
+    white-space: normal;
+  }
+
+  .text {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+
+  .photos {
+    flex-wrap: nowrap;
+  }
+}
