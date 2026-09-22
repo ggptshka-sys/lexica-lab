@@ -6,6 +6,8 @@ import styles from './LexicaMark3D.module.css'
 type Props = {
   /** When false, mark stays in rest pose (e.g. during preloader). */
   active?: boolean
+  /** Hero scroll-sink. Off in menu so mark stays centered. */
+  followScroll?: boolean
 }
 
 const STROKE = 0.14
@@ -95,7 +97,7 @@ function makeSlashGeometry(): THREE.ExtrudeGeometry {
  * Hero-only Lexica mark.
  * Intro spin → idle; on scroll sinks under The Lab (does not follow the page).
  */
-export function LexicaMark3D({ active = true }: Props) {
+export function LexicaMark3D({ active = true, followScroll = true }: Props) {
   const hostRef = useRef<HTMLDivElement>(null)
   const reduced = usePrefersReducedMotion()
 
@@ -206,7 +208,7 @@ export function LexicaMark3D({ active = true }: Props) {
     const clock = new THREE.Clock()
 
     const measureScroll = () => {
-      if (!active || reduced) return 0
+      if (!followScroll || !active || reduced) return 0
       const range = Math.max(1, window.innerHeight * 0.88)
       return clamp(window.scrollY / range, 0, 1)
     }
@@ -299,7 +301,7 @@ export function LexicaMark3D({ active = true }: Props) {
       renderer.dispose()
       if (renderer.domElement.parentNode === host) host.removeChild(renderer.domElement)
     }
-  }, [active, reduced])
+  }, [active, reduced, followScroll])
 
   return <div ref={hostRef} className={styles.root} aria-hidden />
 }

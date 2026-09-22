@@ -121,7 +121,7 @@
     --case-min-h: auto;
     --logo-w: 110px;
     --logo-h: 30px;
-    --mark-scale: 0.55;
+    --mark-scale: 0.4;
   }
 }
 
@@ -137,6 +137,7 @@
     --logo-h: 30px;
     --lab-pad-top: 40px;
     --lab-pad-bottom: 40px;
+    --mark-scale: 0.34;
   }
 }
 

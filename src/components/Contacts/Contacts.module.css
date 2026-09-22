@@ -332,21 +332,11 @@
   .body {
     grid-template-columns: 1fr;
     margin-top: 80px;
-    gap: 80px;
+    gap: 0;
   }
 
   .side {
-    gap: 80px;
-  }
-
-  .logo {
-    width: 165px;
-  }
-
-  .nav {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 20px;
+    display: none;
   }
 
   .formCol {
@@ -380,10 +370,5 @@
 
   .body {
     margin-top: 64px;
-    gap: 64px;
-  }
-
-  .side {
-    gap: 48px;
   }
 }

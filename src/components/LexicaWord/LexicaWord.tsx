@@ -13,7 +13,7 @@ type Props = {
 
 const FADE_MS = 1100
 const HOLD_MS = 2600
-const BASE_OPACITY = 0.09
+const BASE_OPACITY = 0.13
 
 function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3)

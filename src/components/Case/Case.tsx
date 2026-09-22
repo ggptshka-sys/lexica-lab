@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { useEffect, useRef } from 'react'
 import hrCrmImg from '../../assets/cases/hr-crm.png'
 import coreFitnessImg from '../../assets/cases/core-fitness.png'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
@@ -74,6 +75,102 @@ function FeaturedCard({
   )
 }
 
+/** Mobile: slow auto-scroll + loop, pauses on touch; desktop stays static row. */
+function ShotsStrip() {
+  const reduced = usePrefersReducedMotion()
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    const track = trackRef.current
+    if (!scroller || !track || reduced) return
+
+    const mq = window.matchMedia('(max-width: 1100px)')
+
+    let raf = 0
+    let paused = false
+    let resumeAt = 0
+    let last = performance.now()
+    const SPEED = 28 // px/s
+
+    const loopWidth = () => track.scrollWidth / 2
+
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000)
+      last = now
+
+      if (mq.matches && !paused && now >= resumeAt) {
+        const half = loopWidth()
+        if (half > 0) {
+          scroller.scrollLeft += SPEED * dt
+          if (scroller.scrollLeft >= half) {
+            scroller.scrollLeft -= half
+          }
+        }
+      }
+
+      raf = requestAnimationFrame(tick)
+    }
+
+    const pause = () => {
+      paused = true
+    }
+    const softResume = () => {
+      paused = false
+      resumeAt = performance.now() + 1400
+    }
+
+    const onMq = () => {
+      if (!mq.matches) scroller.scrollLeft = 0
+    }
+
+    scroller.addEventListener('pointerdown', pause)
+    scroller.addEventListener('touchstart', pause, { passive: true })
+    scroller.addEventListener('pointerup', softResume)
+    scroller.addEventListener('pointercancel', softResume)
+    scroller.addEventListener('touchend', softResume, { passive: true })
+    scroller.addEventListener('touchcancel', softResume, { passive: true })
+    mq.addEventListener('change', onMq)
+
+    raf = requestAnimationFrame(tick)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      scroller.removeEventListener('pointerdown', pause)
+      scroller.removeEventListener('touchstart', pause)
+      scroller.removeEventListener('pointerup', softResume)
+      scroller.removeEventListener('pointercancel', softResume)
+      scroller.removeEventListener('touchend', softResume)
+      scroller.removeEventListener('touchcancel', softResume)
+      mq.removeEventListener('change', onMq)
+    }
+  }, [reduced])
+
+  return (
+    <div className={styles.shots} ref={scrollerRef} aria-hidden>
+      <div className={styles.shotsTrack} ref={trackRef}>
+        {SHOT_HEIGHTS.map((h, i) => (
+          <div
+            key={`a-${i}`}
+            className={styles.shot}
+            style={{ '--shot-h': `${h}px` } as CSSProperties}
+          />
+        ))}
+        {!reduced
+          ? SHOT_HEIGHTS.map((h, i) => (
+              <div
+                key={`b-${i}`}
+                className={[styles.shot, styles.shotDup].join(' ')}
+                style={{ '--shot-h': `${h}px` } as CSSProperties}
+              />
+            ))
+          : null}
+      </div>
+    </div>
+  )
+}
+
 export function Case() {
   return (
     <section
@@ -98,15 +195,7 @@ export function Case() {
 
         <div className={styles.shotsBlock}>
           <p className={styles.shotsLabel}>шоты других проектов:</p>
-          <div className={styles.shots} aria-hidden>
-            {SHOT_HEIGHTS.map((h, i) => (
-              <div
-                key={i}
-                className={styles.shot}
-                style={{ '--shot-h': `${h}px` } as CSSProperties}
-              />
-            ))}
-          </div>
+          <ShotsStrip />
         </div>
       </div>
     </section>

@@ -205,6 +205,10 @@
   opacity: 0.1;
 }
 
+.shotsTrack {
+  display: contents;
+}
+
 .shot {
   flex: 1 0 0;
   min-width: 0;
@@ -218,6 +222,11 @@
 
 .shot:hover {
   transform: scale(1.08);
+}
+
+/* Duplicate set — only for mobile marquee loop */
+.shotDup {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -264,21 +273,36 @@
 
   .shotsBlock {
     margin-top: 80px;
+    overflow: hidden;
   }
 
   .shots {
+    display: block;
     overflow-x: auto;
+    overflow-y: hidden;
     padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    touch-action: pan-x;
   }
 
   .shots::-webkit-scrollbar {
     display: none;
   }
 
+  .shotsTrack {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: max-content;
+  }
+
   .shot {
     flex: 0 0 73px;
+  }
+
+  .shotDup {
+    display: block;
   }
 }
 

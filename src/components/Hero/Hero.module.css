@@ -345,15 +345,24 @@
     width: 100%;
     margin-top: 0;
     gap: 20px;
+    align-items: stretch;
   }
 
   .lead {
+    width: 100%;
     font-size: 14px;
+    line-height: 1.4;
     letter-spacing: -0.05em;
   }
 
+  /* Figma 105:1564 — full-width CTA */
   .btnPrimary {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border-radius: 4px;
     font-size: 14px;
+    line-height: 1.1;
   }
 
   .scrollWrap {
