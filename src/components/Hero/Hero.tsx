@@ -236,7 +236,7 @@ export function Hero({
 
       {uiReady ? (
         <Suspense fallback={null}>
-          <LexicaMark3D active />
+          <LexicaMark3D active className={styles.mark3d} />
         </Suspense>
       ) : null}
       {uiReady ? <HeroUi /> : null}

@@ -235,20 +235,36 @@ export function Nav({ visible = true }: { visible?: boolean }) {
   const onLight = useNavOnLight()
   const detached = useNavDetached()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [drawerMounted, setDrawerMounted] = useState(false)
+  const [drawerIn, setDrawerIn] = useState(false)
   const [markKey, setMarkKey] = useState(0)
   const show = visible && !detached
   const scrolledAway = useNavScrollAway(show && !menuOpen)
 
-  useScrollLock(menuOpen)
+  useScrollLock(menuOpen || drawerMounted)
 
   useEffect(() => {
-    if (!menuOpen) return
+    if (menuOpen) {
+      setDrawerMounted(true)
+      setMarkKey((k) => k + 1)
+      const id = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setDrawerIn(true))
+      })
+      return () => cancelAnimationFrame(id)
+    }
+    setDrawerIn(false)
+    const t = window.setTimeout(() => setDrawerMounted(false), 340)
+    return () => window.clearTimeout(t)
+  }, [menuOpen])
+
+  useEffect(() => {
+    if (!menuOpen && !drawerMounted) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMenuOpen(false)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [menuOpen])
+  }, [menuOpen, drawerMounted])
 
   useEffect(() => {
     if (!show) setMenuOpen(false)
@@ -256,12 +272,7 @@ export function Nav({ visible = true }: { visible?: boolean }) {
 
   const closeMenu = () => setMenuOpen(false)
 
-  const toggleMenu = () => {
-    setMenuOpen((v) => {
-      if (!v) setMarkKey((k) => k + 1)
-      return !v
-    })
-  }
+  const toggleMenu = () => setMenuOpen((v) => !v)
 
   return (
     <header
@@ -270,7 +281,7 @@ export function Nav({ visible = true }: { visible?: boolean }) {
         onLight ? styles.onLight : styles.onDark,
         show ? styles.headerVisible : styles.headerHidden,
         scrolledAway ? styles.headerAway : '',
-        menuOpen ? styles.menuOpen : '',
+        menuOpen || drawerIn ? styles.menuOpen : '',
       ]
         .filter(Boolean)
         .join(' ')}
@@ -334,8 +345,14 @@ export function Nav({ visible = true }: { visible?: boolean }) {
         />
       </button>
 
-      {menuOpen ? (
-        <div className={styles.drawer} role="dialog" aria-modal="true" aria-label="меню">
+      {drawerMounted ? (
+        <div
+          className={[styles.drawer, drawerIn ? styles.drawerIn : ''].filter(Boolean).join(' ')}
+          role="dialog"
+          aria-modal="true"
+          aria-label="меню"
+          aria-hidden={!drawerIn}
+        >
           <nav className={styles.drawerNav} aria-label="мобильная навигация">
             {LINKS.map((link) => (
               <ScrambleLink
@@ -351,7 +368,7 @@ export function Nav({ visible = true }: { visible?: boolean }) {
 
           <div className={styles.drawerMarkStage} aria-hidden>
             <Suspense fallback={null}>
-              <LexicaMark3D key={markKey} active followScroll={false} />
+              <LexicaMark3D key={markKey} active followScroll={false} scaleMul={2} />
             </Suspense>
           </div>
 

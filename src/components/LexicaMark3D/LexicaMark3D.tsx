@@ -8,6 +8,9 @@ type Props = {
   active?: boolean
   /** Hero scroll-sink. Off in menu so mark stays centered. */
   followScroll?: boolean
+  /** Multiplier for `--mark-scale` (e.g. 2 in mobile menu). */
+  scaleMul?: number
+  className?: string
 }
 
 const STROKE = 0.14
@@ -97,7 +100,12 @@ function makeSlashGeometry(): THREE.ExtrudeGeometry {
  * Hero-only Lexica mark.
  * Intro spin → idle; on scroll sinks under The Lab (does not follow the page).
  */
-export function LexicaMark3D({ active = true, followScroll = true }: Props) {
+export function LexicaMark3D({
+  active = true,
+  followScroll = true,
+  scaleMul = 1,
+  className,
+}: Props) {
   const hostRef = useRef<HTMLDivElement>(null)
   const reduced = usePrefersReducedMotion()
 
@@ -108,6 +116,8 @@ export function LexicaMark3D({ active = true, followScroll = true }: Props) {
     const w0 = host.clientWidth || window.innerWidth
     const h0 = host.clientHeight || window.innerHeight
     if (w0 < 2 || h0 < 2) return
+
+    const readScale = () => readMarkScale() * scaleMul
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -195,7 +205,7 @@ export function LexicaMark3D({ active = true, followScroll = true }: Props) {
     const restRot = new THREE.Euler(-0.28, 0.22, 0.04)
     root.rotation.copy(restRot)
     root.position.set(0, 0, 0)
-    let restScale = readMarkScale()
+    let restScale = readScale()
     root.scale.setScalar(reduced ? restScale : INTRO_START_SCALE)
 
     let raf = 0
@@ -223,7 +233,7 @@ export function LexicaMark3D({ active = true, followScroll = true }: Props) {
       camera.aspect = w / Math.max(1, h)
       camera.updateProjectionMatrix()
       renderer.setSize(w, h, false)
-      restScale = readMarkScale()
+      restScale = readScale()
     }
 
     const tick = () => {
@@ -301,7 +311,13 @@ export function LexicaMark3D({ active = true, followScroll = true }: Props) {
       renderer.dispose()
       if (renderer.domElement.parentNode === host) host.removeChild(renderer.domElement)
     }
-  }, [active, reduced, followScroll])
+  }, [active, reduced, followScroll, scaleMul])
 
-  return <div ref={hostRef} className={styles.root} aria-hidden />
+  return (
+    <div
+      ref={hostRef}
+      className={[styles.root, className].filter(Boolean).join(' ')}
+      aria-hidden
+    />
+  )
 }

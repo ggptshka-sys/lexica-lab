@@ -75,7 +75,7 @@ function FeaturedCard({
   )
 }
 
-/** Mobile: slow auto-scroll + loop, pauses on touch; desktop stays static row. */
+/** Mobile: auto-scroll + loop; pauses on hover / touch; manual scroll OK. */
 function ShotsStrip() {
   const reduced = usePrefersReducedMotion()
   const scrollerRef = useRef<HTMLDivElement>(null)
@@ -90,9 +90,10 @@ function ShotsStrip() {
 
     let raf = 0
     let paused = false
+    let hovered = false
     let resumeAt = 0
     let last = performance.now()
-    const SPEED = 28 // px/s
+    const SPEED = 32 // px/s
 
     const loopWidth = () => track.scrollWidth / 2
 
@@ -100,9 +101,9 @@ function ShotsStrip() {
       const dt = Math.min(0.05, (now - last) / 1000)
       last = now
 
-      if (mq.matches && !paused && now >= resumeAt) {
+      if (mq.matches && !paused && !hovered && now >= resumeAt) {
         const half = loopWidth()
-        if (half > 0) {
+        if (half > 1) {
           scroller.scrollLeft += SPEED * dt
           if (scroller.scrollLeft >= half) {
             scroller.scrollLeft -= half
@@ -117,14 +118,26 @@ function ShotsStrip() {
       paused = true
     }
     const softResume = () => {
+      if (hovered) return
       paused = false
-      resumeAt = performance.now() + 1400
+      resumeAt = performance.now() + 900
+    }
+    const onEnter = () => {
+      hovered = true
+      paused = true
+    }
+    const onLeave = () => {
+      hovered = false
+      paused = false
+      resumeAt = 0
     }
 
     const onMq = () => {
       if (!mq.matches) scroller.scrollLeft = 0
     }
 
+    scroller.addEventListener('mouseenter', onEnter)
+    scroller.addEventListener('mouseleave', onLeave)
     scroller.addEventListener('pointerdown', pause)
     scroller.addEventListener('touchstart', pause, { passive: true })
     scroller.addEventListener('pointerup', softResume)
@@ -137,6 +150,8 @@ function ShotsStrip() {
 
     return () => {
       cancelAnimationFrame(raf)
+      scroller.removeEventListener('mouseenter', onEnter)
+      scroller.removeEventListener('mouseleave', onLeave)
       scroller.removeEventListener('pointerdown', pause)
       scroller.removeEventListener('touchstart', pause)
       scroller.removeEventListener('pointerup', softResume)

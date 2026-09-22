@@ -368,6 +368,10 @@
   .scrollWrap {
     display: none;
   }
+
+  .mark3d {
+    transform: translateY(24px);
+  }
 }
 
 @media (max-width: 640px) {
